@@ -1,0 +1,87 @@
+import logo from '../../assets/logo.png'
+import data from '../../data/turnos.json'
+import videos from '../../data/videos.json'
+import { useEffect, useState } from 'react'
+
+export default function TvMedia() {
+  const [index, setIndex] = useState(0)
+  const [now, setNow] = useState(new Date())
+  const dateStr = now.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: '2-digit' })
+  const timeStr = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+
+  useEffect(() => {
+    const vid = setInterval(() => {
+      setIndex((i) => (i + 1) % videos.items.length)
+    }, 30000)
+    return () => clearInterval(vid)
+  }, [])
+
+  useEffect(() => {
+    const clock = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(clock)
+  }, [])
+
+  const current = videos.items[index]
+  const src = `https://www.youtube.com/embed/${current.id}?autoplay=1&mute=1&controls=0&rel=0` 
+
+  return (
+    <div className="min-h-screen bg-white text-gray-900 px-6 py-4">
+      <header className="grid grid-cols-3 items-center mb-4">
+        <div />
+        <div className="flex justify-center">
+          <img src={logo} alt="Logo" className="h-10" />
+        </div>
+        <div className="text-right text-sm text-[#439282]">
+          <div className="font-semibold">{dateStr}</div>
+          <div>{timeStr}</div>
+        </div>
+      </header>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <section className="md:col-span-2 border rounded-lg p-3 flex items-center justify-center">
+          <div className="w-full">
+            <div className="aspect-video w-full overflow-hidden rounded-lg shadow">
+              <iframe
+                className="w-full h-full"
+                src={src}
+                title={current.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <div className="mt-2 text-sm text-gray-600">{current.title}</div>
+          </div>
+        </section>
+
+        <aside className="border rounded-lg overflow-hidden">
+          <div className="grid grid-cols-2 bg-[#439282] text-white text-sm font-semibold p-3">
+            <div>Paciente</div>
+            <div className="text-right">Turno</div>
+          </div>
+          <ul className="divide-y">
+            {data.lista.slice(0, 4).map((t, i) => (
+              <li key={i} className={`grid grid-cols-2 p-3 ${i % 2 ? 'bg-[#eaf3f1]' : ''}`}>
+                <div className="font-medium">{t.paciente}</div>
+                <div className="text-right">
+                  <div className="font-semibold">{t.codigo}</div>
+                  <div className="text-xs text-gray-600">{t.lugar}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+
+      <footer className="mt-4 flex items-center justify-between text-xs text-[#439282]">
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="Logo" className="h-6" />
+          <span>Santa Salud</span>
+        </div>
+        <div>
+          <span className="mr-2">{dateStr}</span>
+          <span>{timeStr}</span>
+        </div>
+      </footer>
+    </div>
+  )
+}

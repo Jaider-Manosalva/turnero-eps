@@ -1,0 +1,17 @@
+{
+  "selected": {
+    "paciente": "SILVANA BUENO CABEZAS",
+    "codigo": "CC-B-109",
+    "lugar": "CONSULTORIO 115",
+    "motivo": "CUMPLIMIENTO DE CITAS"
+  },
+  "lista": [
+    { "paciente": "EVELYN ORTIZ LOPEZ", "codigo": "CCF-A-43", "lugar": "CAJA 1" },
+    { "paciente": "SILVANA BUENO CABEZAS", "codigo": "CC-B-109", "lugar": "CONSULTORIO 115" },
+    { "paciente": "MARIA LILIANA VILLAMUEZ BENAVIDES", "codigo": "LAB FAC-B-12", "lugar": "LABORATORIO" },
+    { "paciente": "MARIA CECILIA RONCACIO ALONSO", "codigo": "LAB FAC-A-14", "lugar": "LABORATORIO" },
+    { "paciente": "VALENTINA VIVAS PAMPLONA", "codigo": "CC-B-17", "lugar": "CONSULTORIO" },
+    { "paciente": "DAMARYS DEL VALLE RODRIGUEZ TRANQUINI", "codigo": "CC-B-28", "lugar": "CONSULTORIO" },
+    { "paciente": "MARIA ELENA MONTENEGRO", "codigo": "CC-B-63", "lugar": "CONSULTORIO" }
+  ]
+}
